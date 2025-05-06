@@ -1,15 +1,20 @@
 package com.pluralsight;
 
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+
 public class Employee {
     private int employeeId;
     private String name;
     private String department;
-    private int payRate;
-    private int hoursWorked;
+    private double payRate;
+    private double hoursWorked;
+    private double startTime;
+    private double endTime;
 
     public Employee (){};
 
-    public Employee(int employeeId, String name, String department, int payRate, int hoursWorked) {
+    public Employee(int employeeId, String name, String department, double payRate, double hoursWorked) {
         this.employeeId = employeeId;
         this.name = name;
         this.department = department;
@@ -41,33 +46,48 @@ public class Employee {
         this.department = department;
     }
 
-    public int getPayRate() {
+    public double getPayRate() {
         return payRate;
     }
 
-    public void setPayRate(int payRate) {
+    public void setPayRate(double payRate) {
         this.payRate = payRate;
     }
 
-    public int getHoursWorked() {
+    public double getHoursWorked() {
         return hoursWorked;
     }
 
-    public void setHoursWorked(int hoursWorked) {
+    public void setHoursWorked(double hoursWorked) {
         this.hoursWorked = hoursWorked;
     }
 
-    public int getTotalPay() {
+    public double getTotalPay() {
         return payRate * hoursWorked;
     };
 
-    public int getRegularHours(){
-        int overTime = hoursWorked - 40;
+    public double getRegularHours(){
+        double overTime = hoursWorked - 40;
         return hoursWorked - overTime;
     };
 
-    public int getOvertimeHours() {
+    public double getOvertimeHours() {
       return hoursWorked - 40;
     };
+
+    public void punchIn(LocalTime time){
+        this.startTime = Double.parseDouble(String.valueOf(time));
+    }
+
+    public LocalTime punchIn(){
+        return LocalTime.parse(String.valueOf(startTime));
+    }
+    public void punchOut(double time){
+        endTime = time;
+    }
+
+    public LocalTime punchOut(){
+        return LocalTime.parse(String.valueOf(endTime));
+    }
 
 }
