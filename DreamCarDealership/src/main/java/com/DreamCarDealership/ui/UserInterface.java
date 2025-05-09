@@ -90,12 +90,12 @@ public class UserInterface {
     }
 
 
-    private void processFindByPriceRange() { /* TODO */ }
-    private void processFindByMakeModel()  { /* TODO */ }
-    private void processFindByYearRange()  { /* TODO */ }
-    private void processFindByColor()      { /* TODO */ }
-    private void processFindByMileageRange(){ /* TODO */ }
-    private void processFindByType()       { /* TODO */ }
-    private void processAddVehicleRequest(){ /* TODO */ }
-    private void processRemoveVehicleRequest(){ /* TODO */ }
+    private void processFindByPriceRange() {}
+    private void processFindByMakeModel()  {}
+    private void processFindByYearRange()  {}
+    private void processFindByColor()      {}
+    private void processFindByMileageRange(){}
+    private void processFindByType()       {}
+    private void processAddVehicleRequest(){}
+    private void processRemoveVehicleRequest(){}
 }

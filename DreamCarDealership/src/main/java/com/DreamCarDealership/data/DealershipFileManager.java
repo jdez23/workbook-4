@@ -12,10 +12,10 @@ public class DealershipFileManager {
     private static final File INVENTORY_FILE = new File("src/main/resources/inventory.csv");
 
     public static Dealership getDealership() {
-        Dealership dealership = new Dealership("Dream Car Dealership", "123 Magic St", "555-1234");
+        Dealership dealership = new Dealership("Dream Car Dealership", "123 Magic St", "000-000-0000");
 
         try (BufferedReader reader = new BufferedReader(new FileReader(INVENTORY_FILE))) {
-            reader.readLine(); // skip header
+            reader.readLine();
 
             String line;
             while ((line = reader.readLine()) != null) {
@@ -25,17 +25,17 @@ public class DealershipFileManager {
                     continue;
                 }
 
-                Vehicle v = new Vehicle();
-                v.setVin(Integer.parseInt(tokens[0]));
-                v.setYear(Integer.parseInt(tokens[1]));
-                v.setMake(tokens[2]);
-                v.setModel(tokens[3]);
-                v.setVehicleType(tokens[4]);
-                v.setColor(tokens[5]);
-                v.setOdometer(Integer.parseInt(tokens[6]));
-                v.setPrice(Double.parseDouble(tokens[7]));
+                Vehicle vehicle = new Vehicle();
+                vehicle.setVin(Integer.parseInt(tokens[0]));
+                vehicle.setYear(Integer.parseInt(tokens[1]));
+                vehicle.setMake(tokens[2]);
+                vehicle.setModel(tokens[3]);
+                vehicle.setVehicleType(tokens[4]);
+                vehicle.setColor(tokens[5]);
+                vehicle.setOdometer(Integer.parseInt(tokens[6]));
+                vehicle.setPrice(Double.parseDouble(tokens[7]));
 
-                dealership.addVehicle(v);
+                dealership.addVehicle(vehicle);
             }
 
         } catch (IOException e) {
@@ -45,8 +45,6 @@ public class DealershipFileManager {
         return dealership;
     }
 
-    // Save method stub (you'll implement this in a later phase)
     public static void saveDealership(Dealership dealership) {
-        // TODO: implement writing to inventory.csv
     }
 }
