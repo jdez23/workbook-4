@@ -1,72 +1,52 @@
 package com.DreamCarDealership.data;
-
 import com.DreamCarDealership.model.Vehicle;
 
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.regex.Pattern;
 
 public class DealershipFileManager {
-    private static File file = new File("src/main/resources/Inventory.csv");
 
-    public static List<Vehicle> getDealership(){
+    private static final File INVENTORY_FILE = new File("src/main/resources/inventory.csv");
 
-        List<Vehicle> inventoryOfVehicles = new ArrayList<>();
+    public static Dealership getDealership() {
+        Dealership dealership = new Dealership("Dream Car Dealership", "123 Magic St", "555-1234");
 
-        try {
-            System.out.println("Loading Vehicles' Information");
+        try (BufferedReader reader = new BufferedReader(new FileReader(INVENTORY_FILE))) {
+            reader.readLine(); // skip header
 
-            BufferedReader bufReader = new BufferedReader(new FileReader(file));
-            String FileInput;
-
-            bufReader.readLine();
-
-            while ((FileInput = bufReader.readLine()) != null) {
-                String[] tokens = FileInput.split(Pattern.quote("|"));
-                Vehicle vehicle = new Vehicle();
-                if (tokens.length == 8) {
-                    vehicle.setVin(Integer.parseInt(tokens[0]));
-
-                    vehicle.setYear(Integer.parseInt(tokens[1]));
-
-                    vehicle.setMake(tokens[2]);
-
-                    vehicle.setModel(tokens[3]);
-
-                    vehicle.setVehicleType(tokens[4]);
-
-                    vehicle.setColor(tokens[5]);
-
-                    vehicle.setOdometer(Integer.parseInt(tokens[6]));
-
-                    vehicle.setPrice(Double.parseDouble(tokens[7]));
-                } else {
-                    System.out.println("error: missing or too much information on a given transaction");
+            String line;
+            while ((line = reader.readLine()) != null) {
+                String[] tokens = line.split(Pattern.quote("|"));
+                if (tokens.length != 8) {
+                    System.out.println("Error in CSV: " + line);
+                    continue;
                 }
-                inventoryOfVehicles.add(vehicle);
+
+                Vehicle v = new Vehicle();
+                v.setVin(Integer.parseInt(tokens[0]));
+                v.setYear(Integer.parseInt(tokens[1]));
+                v.setMake(tokens[2]);
+                v.setModel(tokens[3]);
+                v.setVehicleType(tokens[4]);
+                v.setColor(tokens[5]);
+                v.setOdometer(Integer.parseInt(tokens[6]));
+                v.setPrice(Double.parseDouble(tokens[7]));
+
+                dealership.addVehicle(v);
             }
-            bufReader.close();
 
         } catch (IOException e) {
-            System.out.println("error with .csv file naming, please check if its the correct save file");
-
+            System.out.println("Error loading inventory: " + e.getMessage());
         }
 
-        return inventoryOfVehicles;
+        return dealership;
     }
 
-    public static void saveDealerShip(){}
-
-    public static void fileCheck() {
-        if (file.exists()) {
-            System.out.println("Does not exist.");
-        } else {
-            System.out.println("the file does not exist");
-        }
+    // Save method stub (you'll implement this in a later phase)
+    public static void saveDealership(Dealership dealership) {
+        // TODO: implement writing to inventory.csv
     }
-
 }

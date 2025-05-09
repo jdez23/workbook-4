@@ -2,52 +2,45 @@ package com.DreamCarDealership.data;
 
 import com.DreamCarDealership.model.Vehicle;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Dealership {
-
     private String name;
     private String address;
     private String phone;
-    private static List<Vehicle> inventory = DealershipFileManager.getDealership();
+    private List<Vehicle> inventory;
 
     public Dealership(String name, String address, String phone) {
         this.name = name;
         this.address = address;
         this.phone = phone;
+        this.inventory = new ArrayList<>();
     }
 
-    public void getVehiclesByPrice(int min, int max){}
-
-    public void getVehiclesByMakeModel(String make, String model){}
-
-    public void getVehiclesByYear(int min, int max){}
-
-    public void getVehiclesByColor(String color){}
-
-    public void getVehiclesByMileage(int min, int max){}
-
-    public void getVehiclesByType(String vehicleType){}
-
-    public static List<Vehicle> getAllVehicles(){
-        for (Vehicle vehicle : inventory){
-
-            System.out.println(vehicle.getVin());
-        }
-
-        return null;
+    public void addVehicle(Vehicle vehicle) {
+        inventory.add(vehicle);
     }
 
-    public void addVehicles(Vehicle vehicle){}
-
-    public void removeVehicles(Vehicle vehicle){}
-
-
-
-    public static void fileLoad(){
-
-        DealershipFileManager.fileCheck();
+    public void removeVehicle(Vehicle vehicle) {
+        inventory.remove(vehicle);
     }
 
+    public List<Vehicle> getAllVehicles() {
+        return inventory;
+    }
 
+    // Search methods — return null for now
+    public List<Vehicle> getVehiclesByPrice(int min, int max) { return null; }
+    public List<Vehicle> getVehiclesByMakeModel(String make, String model) { return null; }
+    public List<Vehicle> getVehiclesByYear(int min, int max) { return null; }
+    public List<Vehicle> getVehiclesByColor(String color) { return null; }
+    public List<Vehicle> getVehiclesByMileage(int min, int max) { return null; }
+    public List<Vehicle> getVehiclesByType(String vehicleType) { return null; }
+
+    // Getters (optional for UI use)
+    public String getName() { return name; }
+    public String getAddress() { return address; }
+    public String getPhone() { return phone; }
 }
+

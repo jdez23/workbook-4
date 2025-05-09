@@ -55,9 +55,9 @@ public class UserInterface {
 
     //  Loads the Dealership from file via DealershipFileManager.
     private void init() {
-        DealershipFileManager fileManager = new DealershipFileManager();
-        this.dealership = (Dealership) fileManager.getDealership();
+        this.dealership = DealershipFileManager.getDealership();
     }
+
 
     private void showMenu() {
         System.out.println("\nPlease select an option:");
