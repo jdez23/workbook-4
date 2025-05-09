@@ -2,7 +2,6 @@ package com.DreamCarDealership.data;
 
 import com.DreamCarDealership.model.Vehicle;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class Dealership {
@@ -30,12 +29,13 @@ public class Dealership {
 
     public void getVehiclesByType(String vehicleType){}
 
-    public static void getAllVehicles(){
+    public static List<Vehicle> getAllVehicles(){
         for (Vehicle vehicle : inventory){
 
             System.out.println(vehicle.getVin());
         }
 
+        return null;
     }
 
     public void addVehicles(Vehicle vehicle){}
