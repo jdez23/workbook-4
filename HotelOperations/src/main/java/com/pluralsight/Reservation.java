@@ -1,59 +1,33 @@
 package com.pluralsight;
 
 public class Reservation {
-    private String roomType;
-    private int price;
-    private int numOfNights;
-    private boolean isWeekend;
-    private int resTotal;
+    private String guestName;
+    private String reservationDate;
+    private Room room;
 
-    public Reservation (){};
-
-    public Reservation(String roomType, int price, int numOfNights, boolean isWeekend, int resTotal) {
-        this.roomType = roomType;
-        this.price = price;
-        this.numOfNights = numOfNights;
-        this.isWeekend = isWeekend;
-        this.resTotal = resTotal;
+    public Reservation(String guestName, String reservationDate, Room room) {
+        this.guestName = guestName;
+        this.reservationDate = reservationDate;
+        this.room = room;
     }
 
-    public String getRoomType() {
-        return roomType;
+    public String getGuestName() {
+        return guestName;
     }
 
-    public void setRoomType(String roomType) {
-        this.roomType = roomType;
+    public String getReservationDate() {
+        return reservationDate;
     }
 
-    public int getPrice() {
-        return price;
+    public Room getRoom() {
+        return room;
     }
 
-    public void setPrice(int price) {
-        this.price = price;
+    public void checkIn() {
+        room.checkIn();
     }
 
-    public int getNumOfNights() {
-        return numOfNights;
-    }
-
-    public void setNumOfNights(int numOfNights) {
-        this.numOfNights = numOfNights;
-    }
-
-    public boolean isWeekend() {
-        return isWeekend;
-    }
-
-    public void setWeekend(boolean weekend) {
-        isWeekend = weekend;
-    }
-
-    public int getResTotal() {
-        return resTotal;
-    }
-
-    public void setResTotal(int resTotal) {
-        this.resTotal = resTotal;
+    public void checkOut() {
+        room.checkOut();
     }
 }

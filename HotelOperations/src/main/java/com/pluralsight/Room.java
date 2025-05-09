@@ -1,95 +1,63 @@
 package com.pluralsight;
 
 public class Room {
-    private int roomNum;
-    private int roomFloor;
-    private int beds;
-    private int price;
+    private String roomNumber;
+    private String roomType;
+    private double rate;
     private boolean isOccupied;
     private boolean isDirty;
-    private boolean isAvailable;
 
-    public Room(){};
-
-    public Room(int roomNum, int roomFloor, int beds, int price, boolean isOccupied, boolean isDirty, boolean isAvailable) {
-        this.roomNum = roomNum;
-        this.roomFloor = roomFloor;
-        this.beds = beds;
-        this.price = price;
-        this.isOccupied = isOccupied;
-        this.isDirty = isDirty;
-        this.isAvailable = isAvailable;
+    public Room(String roomNumber, String roomType, double rate) {
+        this.roomNumber = roomNumber;
+        this.roomType   = roomType;
+        this.rate       = rate;
+        this.isOccupied = false;  // initially not occupied
+        this.isDirty    = false;  // initially clean
     }
 
-    public int getRoomNum() {
-        return roomNum;
+    public String getRoomNumber() {
+        return roomNumber;
     }
 
-    public void setRoomNum(int roomNum) {
-        this.roomNum = roomNum;
+    public String getRoomType() {
+        return roomType;
     }
 
-    public int getRoomFloor() {
-        return roomFloor;
-    }
-
-    public void setRoomFloor(int roomFloor) {
-        this.roomFloor = roomFloor;
-    }
-
-    public int getBeds() {
-        return beds;
-    }
-
-    public void setBeds(int beds) {
-        this.beds = beds;
-    }
-
-    public int getPrice() {
-        return price;
-    }
-
-    public void setPrice(int price) {
-        this.price = price;
+    public double getRate() {
+        return rate;
     }
 
     public boolean isOccupied() {
         return isOccupied;
     }
 
-    public void setOccupied(boolean occupied) {
-        isOccupied = occupied;
-    }
-
     public boolean isDirty() {
         return isDirty;
     }
 
-    public void setDirty(boolean dirty) {
-        isDirty = dirty;
-    }
-
     public boolean isAvailable() {
-        return isAvailable;
+        // available only if not occupied and not dirty
+        return !isOccupied && !isDirty;
     }
 
-    public void setAvailable(boolean available) {
-        isAvailable = available;
+
+    public boolean checkIn() {
+        if (isAvailable()) {
+            isOccupied = true;
+            isDirty    = true;
+        }
+        return false;
     }
 
-    public void checkIn(){
-        this.isOccupied = true;
-        this.isDirty = true;
-        this.isAvailable = false;
-    };
+    public void checkOut() {
+        isOccupied = false;
+    }
 
-    public void checkout(){
-        cleanRoom();
-        this.isOccupied = false;
-        this.isAvailable = true;
-    };
-
-    public void cleanRoom() {
-        this.isDirty = false;
-    };
+    public boolean cleanRoom() {
+        if (!isOccupied) {
+            isDirty = false;
+            return true;
+        }
+        return false;
+    }
 }
